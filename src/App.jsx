@@ -1,6 +1,8 @@
+import { Header } from './components/initial/Header';
+
 const App = () => {
   return (
-    <div>App page</div>
+    <Header />
   )
 }
 

@@ -1,6 +1,7 @@
 import { Flex, Box, Text, Input, Button, IconButton, InputGroup, InputRightElement, Badge, InputLeftElement } from '@chakra-ui/react';
 import { ArrowBackIcon, EditIcon, CheckIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import useUserInformation from '../../hooks/user/useUserInformation';
+import './User.css';
 
 const UserInformation = () => {
   const {
@@ -27,11 +28,11 @@ const UserInformation = () => {
   } = useUserInformation();
 
   const renderValidationBadge = (valid, errorMessage) => {
+    let badgeColor = "invalid-badge"; // Predeterminado a rojo
     if (valid) {
-      return <Badge colorScheme="green">{errorMessage}</Badge>;
-    } else {
-      return <Badge colorScheme="red">{errorMessage}</Badge>;
+      badgeColor = "valid-badge";
     }
+    return <Badge className={`error-badge ${badgeColor}`}>{errorMessage}</Badge>;
   };
 
   const handleInputChange = (setter, validator) => (event) => {
@@ -69,7 +70,7 @@ const UserInformation = () => {
         </Text>
       </Box>
 
-      <Box mb={4}>
+      <Box mb={8}>
         <Text fontSize="md">Nombre:</Text>
         <InputGroup>
           <Input
@@ -80,14 +81,12 @@ const UserInformation = () => {
         </InputGroup>
         {isEditing && (
           <Box mt={2}>
-            <Text fontSize="sm" color="red.500">
-              {nameErrorMessage}
-            </Text>
+            {renderValidationBadge(nameValid, nameErrorMessage)}
           </Box>
         )}
       </Box>
 
-      <Box mb={4}>
+      <Box mb={8}>
         <Text fontSize="md">Correo electrónico:</Text>
         <InputGroup>
           <Input
@@ -99,14 +98,12 @@ const UserInformation = () => {
         </InputGroup>
         {isEditing && (
           <Box mt={2}>
-            <Text fontSize="sm" color="red.500">
-              {emailErrorMessage}
-            </Text>
+            {renderValidationBadge(emailValid, emailErrorMessage)}
           </Box>
         )}
       </Box>
 
-      <Box mb={4}>
+      <Box mb={8}>
         <Text fontSize="md">Contraseña:</Text>
         <InputGroup>
           <Input
@@ -126,12 +123,11 @@ const UserInformation = () => {
         </InputGroup>
         {isEditing && (
           <Box mt={2}>
-            <Text fontSize="sm" color="red.500">
-              {passwordErrorMessage}
-            </Text>
+            {renderValidationBadge(passwordValid, passwordErrorMessage)}
           </Box>
         )}
       </Box>
+
     </Flex>
   );
 };

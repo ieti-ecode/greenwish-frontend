@@ -1,0 +1,61 @@
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 250px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+  background-color: #fff;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+  color: #007b5e;
+}
+
+.card-description {
+  font-size: 14px;
+  color: #555;
+  margin: 10px 0;
+}
+
+.card-price {
+  font-size: 16px;
+  color: #e53935;
+  font-weight: bold;
+}
+
+.edit-button, .delete-button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-button {
+  background-color: #007b5e;
+  color: white;
+  margin-right: 5px;
+}
+
+.delete-button {
+  background-color: #e53935;
+  color: white;
+}

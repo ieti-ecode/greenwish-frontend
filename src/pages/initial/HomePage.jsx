@@ -1,9 +1,11 @@
 import { Box, Text, Heading, VStack, Image, Flex, ListIcon, UnorderedList, ListItem } from "@chakra-ui/react";
 import { CheckIcon } from '@chakra-ui/icons';
+import Header from "../../components/initial/Header";
 
 export default function HomePage() {
     return (
         <Box>
+            <Header />
             <Box width='100%' height='30vh' display='flex' justifyContent='center' alignItems='center' position='relative'>
                 <Image width='100%' height='100%' objectFit='cover' opacity={0.5} src="src\assets\back.jpg" alt="Plasticos" />
                 <VStack position='absolute' color='gray.700' spacing={4}>

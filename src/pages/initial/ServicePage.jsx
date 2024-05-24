@@ -1,5 +1,6 @@
 import { Box, Card, CardBody, CardHeader, Center, Heading, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react'
 import { ServiceList } from '../../components/initial/ServiceList';
+import Header from '../../components/initial/Header';
 
 export default function ServicePage() {
 
@@ -38,6 +39,7 @@ export default function ServicePage() {
     return (
 
         <Box>
+            <Header />
             <Box width='100%' mb="10" height='30vh' display='flex' justifyContent='center' alignItems='center' position='relative'>
                 <Image width='100%' height='100%' objectFit='cover' opacity={0.6} src="src\assets\service.jpg" alt="Plasticos" />
                 <VStack position='absolute' color='gray.700' spacing={4}>

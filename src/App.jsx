@@ -1,34 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { Suspense } from 'react'
+import { ChakraProvider } from '@chakra-ui/react'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import { Header } from './components/initial/Header'
+import { Contact } from "./components/initial/Contact"
+
+const HomePage = React.lazy(() => import("./pages/initial/HomePage"));
+const ServicePage = React.lazy(() => import("./pages/initial/ServicePage"));
+const Errorpage = React.lazy(() => import("./pages/ErrorPage"));
+const SignUp = React.lazy(() => import("./components/auth/SignUp"));
+const SignIn = React.lazy(() => import("./components/auth/SignIn"));
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <ChakraProvider>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Suspense fallback={<div>Loading...</div>}><HomePage /></Suspense>} />
+          <Route path="/auth/signup" element={<Suspense fallback={<div>Loading...</div>}><SignUp /></Suspense>} />
+          <Route path="/auth/signin" element={<Suspense fallback={<div>Loading...</div>}><SignIn /></Suspense>} />
+          <Route path="/services" element={<Suspense fallback={<div>Loading...</div>}><ServicePage /></Suspense>} />
+        </Routes>
+        <Contact />
+      </BrowserRouter>
+    </ChakraProvider>
   )
 }
 

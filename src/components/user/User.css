@@ -1,0 +1,23 @@
+.error-message {
+    font-size: 10px;
+    margin-top: 10px;
+}
+  
+.error-badge {
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    margin-top: 10px;
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+.valid-badge {
+    background-color: #48BB78; /* Green */
+    color: white;
+}
+
+.invalid-badge {
+    background-color: #F56565; /* Red */
+    color: white;
+}
+  

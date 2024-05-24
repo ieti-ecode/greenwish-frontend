@@ -16,6 +16,7 @@ body {
   height: 100vh;
   background-color: var(--color-fondo);
   color: var(--color-texto);
+  font-family: Arial, sans-serif;
 }
 
 .AppBar {
@@ -50,4 +51,23 @@ body {
     --color-fondo: #ffffff;
     --color-texto: #000000;
   }
+}
+
+.app {
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  padding: 20px;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+h1 {
+  color: #007b5e;
+}
+
+.materials-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }

@@ -12,6 +12,8 @@ const ServicePage = React.lazy(() => import("./pages/initial/ServicePage"));
 const Errorpage = React.lazy(() => import("./pages/ErrorPage"));
 const SignUpPage = React.lazy(() => import("./pages/SignUpPage.jsx"));
 const SignInPage = React.lazy(() => import("./pages/SignInPage.jsx"));
+const ClientPage = React.lazy(() => import("./pages/ClientPage"));
+const AdminPage = React.lazy(() => import("./pages/AdminPage"));
 const App = React.lazy(() => import("./App"));
 import './index.css'
 
@@ -52,6 +54,14 @@ const router = createBrowserRouter([
   {
     path: "/user",
     element: <Suspense fallback={<div>Loading...</div>}><UserInformation /></Suspense>,
+  },
+  {
+    path: "/client",
+    element: <Suspense fallback={<div>Loading...</div>}><ClientPage /></Suspense>,
+  },
+  {
+    path: "/admin",
+    element: <Suspense fallback={<div>Loading...</div>}><AdminPage /></Suspense>,
   }
 ]);
 

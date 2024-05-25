@@ -8,7 +8,7 @@ const UserList = (props) => {
         {users.map(user => (
             <Flex key={user.id} alignItems="center" justifyContent="space-between" p={2} borderBottom="1px solid #ccc">
             <Flex alignItems="center">
-                <Avatar src={`http://localhost:8080/api/v1/users/${user.id}/image`} mr={3} />
+            <Avatar name={user.name} src={user.name} mr={3} />
                 <Box>
                 <Text><strong>ID:</strong> {user.id}</Text>
                 <Text><strong>Nombre:</strong> {user.name}</Text>

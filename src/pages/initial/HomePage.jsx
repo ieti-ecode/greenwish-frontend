@@ -1,6 +1,7 @@
 import { Box, Text, Heading, VStack, Image, Flex, ListIcon, UnorderedList, ListItem } from "@chakra-ui/react";
 import { CheckIcon } from '@chakra-ui/icons';
 import Header from "../../components/initial/Header";
+import Contact from "../../components/initial/Contact";
 
 export default function HomePage() {
     return (
@@ -60,6 +61,7 @@ export default function HomePage() {
                     <Image src="src\assets\city.jpg" alt="Your Image" boxSize="500px" />
                 </Box>
             </Flex>
+            <Contact />
         </Box>
     )
 }

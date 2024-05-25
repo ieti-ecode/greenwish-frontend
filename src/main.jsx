@@ -4,7 +4,8 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import './index.css';
 const HomePage = React.lazy(() => import("./pages/initial/HomePage"));
-const MaterialList = lazy(() => import("./components/material/MaterialList"));
+const MaterialClientPage = lazy(() => import("./pages/material/ClientPage"));
+const MaterialAdmin = lazy(() => import("./pages/material/AdminPage"));
 const UserProfilePage = lazy(() => import("./pages/user/UserProfilePage"));
 const UserProfileAdminPage = lazy(() => import("./pages/user/UserProfileAdminPage"));
 const UserProfileCompanyPage = lazy(() => import("./pages/user/UserProfileCompanyPage"));
@@ -16,9 +17,7 @@ const Errorpage = React.lazy(() => import("./pages/ErrorPage"));
 const AlliedPage = React.lazy(() => import("./pages/initial/AlliedPage.jsx"));
 const SignUpPage = React.lazy(() => import("./pages/initial/SignUpPage.jsx"));
 const SignInPage = React.lazy(() => import("./pages/initial/SignInPage.jsx"));
-const ClientPage = React.lazy(() => import("./pages/ClientPage"));
-const AdminPage = React.lazy(() => import("./pages/AdminPage"));
-const CompanyPage = React.lazy(() => import("./pages/CompaniesPage"));
+const CompanyPage = React.lazy(() => import("./pages/company/CompaniesPage.jsx"));
 const WelcomePage = React.lazy(() => import("./pages/welcome/WelcomePage"));
 const WelcomeClientPage = React.lazy(() => import("./pages/welcome/WelcomeClientPage"));
 const WelcomeCompanyPage = React.lazy(() => import("./pages/welcome/WelcomeCompanyPage"));
@@ -70,8 +69,12 @@ const router = createBrowserRouter([
     element: <Suspense fallback={<div>Cargando...</div>}><CompanyPage /></Suspense>,
   },
   {
+    path: "/materialClient",
+    element: <Suspense fallback={<div>Cargando...</div>}><MaterialClientPage /></Suspense>,
+  },
+  {
     path: "/material",
-    element: <Suspense fallback={<div>Cargando...</div>}><MaterialList /></Suspense>,
+    element: <Suspense fallback={<div>Cargando...</div>}><MaterialAdmin /></Suspense>,
   },
   {
     path: "/userAdmin",
@@ -89,14 +92,6 @@ const router = createBrowserRouter([
     path: "/allUsers",
     element: <Suspense fallback={<div>Cargando...</div>}><UsersPage /></Suspense>,
   },
-  {
-    path: "/client",
-    element: <Suspense fallback={<div>Cargando...</div>}><ClientPage /></Suspense>,
-  },
-  {
-    path: "/admin",
-    element: <Suspense fallback={<div>Cargando...</div>}><AdminPage /></Suspense>,
-  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

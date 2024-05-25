@@ -6,12 +6,12 @@ export const Menu = () => {
     return (
         <Box as="nav">
             <List display="flex" flexDirection="row" gap="55">
-                <Link to="/welcomeComany" style={{ display: 'flex', alignItems: 'center' }}>
+                <Link to="/welcomeCompany" style={{ display: 'flex', alignItems: 'center' }}>
                     <Icon as={ViewIcon} boxSize={5} mr="2" color='green.500' />
                     <Text bgGradient="linear(to-l, green.300, green.500)" bgClip="text" fontWeight="bold" fontSize='xl'>Inicio</Text>
                 </Link>
                 <ListItem>
-                    <Link to="/user" style={{ display: 'flex', alignItems: 'center' }}>
+                    <Link to="/userCompany" style={{ display: 'flex', alignItems: 'center' }}>
                         <Icon as={AtSignIcon} boxSize={5} mr="2" color='green.500' />
                         <Text bgGradient="linear(to-l, green.300, green.500)" bgClip="text" fontWeight="bold" fontSize='xl'>Usuario</Text>
                     </Link>

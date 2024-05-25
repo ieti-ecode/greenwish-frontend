@@ -83,9 +83,6 @@ const UserProfile = (props) => {
             <Text fontSize="md" color="gray.500" mb={2}>
               {user.email}
             </Text>
-            <Text fontSize="md" color="gray.500" mb={2}>
-              Puntaje: {user.points}
-            </Text>
           </>
         ) : (
           <>

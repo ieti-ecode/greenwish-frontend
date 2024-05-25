@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash, FaEdit, FaCheck, FaTimes, FaPencilAlt } from "react-icons/fa";
 import FormField from "../auth/FormField";
 import "./User.css";
-import UserProfileRoles from "./UserProfileRoles";
 import UserProfileImage from "./UserProfileImage";
 
 const UserProfile = (props) => {
@@ -84,12 +83,11 @@ const UserProfile = (props) => {
               {user.email}
             </Text>
             <Text fontSize="md" color="gray.500" mb={2}>
-              Puntaje: {user.points}
+              Rol: {user.role}
             </Text>
           </>
         ) : (
           <>
-            <UserProfileRoles selectedRole={selectedRole} handleRoleChange={handleRoleChange} />
             <UserProfileImage setImageFile={setImageFile} handleSaveImage={() => uploadProfileImage(imageFile)} />
             <FormField
               id="name"

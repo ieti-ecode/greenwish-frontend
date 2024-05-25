@@ -6,6 +6,8 @@ import './index.css';
 const HomePage = React.lazy(() => import("./pages/initial/HomePage"));
 const MaterialList = lazy(() => import("./components/material/MaterialList"));
 const UserProfilePage = lazy(() => import("./pages/user/UserProfilePage.jsx"));
+const UserProfileAdminPage = lazy(() => import("./pages/user/UserProfileAdminPage.jsx"));
+const UserProfileCompanyPage = lazy(() => import("./pages/user/UserProfileCompanyPage.jsx"));
 const ServicePage = React.lazy(() => import("./pages/initial/ServicePage"));
 const BenefitUser = lazy(() => import("./pages/benefit/BenefitUser.jsx"));
 const BenefitAdmin = lazy(() => import("./pages/benefit/BenefitAdmin.jsx"));
@@ -69,6 +71,14 @@ const router = createBrowserRouter([
   {
     path: "/material",
     element: <Suspense fallback={<div>Cargando...</div>}><MaterialList /></Suspense>,
+  },
+  {
+    path: "/userAdmin",
+    element: <Suspense fallback={<div>Cargando...</div>}><UserProfileAdminPage /></Suspense>,
+  },
+  {
+    path: "/userCompany",
+    element: <Suspense fallback={<div>Cargando...</div>}><UserProfileCompanyPage /></Suspense>,
   },
   {
     path: "/user",

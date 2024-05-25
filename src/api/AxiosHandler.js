@@ -13,6 +13,7 @@ export const request = async (method, url, data, contentType = 'application/json
   if (getAuthToken() !== null && getAuthToken() !== 'undefined') {
     headers = { Authorization: `Bearer ${getAuthToken()}` };
   }
+  
   return axios({
     method: method,
     headers: {
@@ -23,12 +24,6 @@ export const request = async (method, url, data, contentType = 'application/json
     data: data,
   });
 };
-
-export const getAllUsers = () => request('get', '/users');
-export const createUser = (user) => request('post', '/users', user);
-export const updateUser = (id, user) => request('put', `/users/${id}`, user);
-export const deleteUser = (id) => request('delete', `/users/${id}`);
-
 
 export const getMaterials = () => request('get', '/materials');
 export const getMaterial = (id) => request('get', `/materials/${id}`);

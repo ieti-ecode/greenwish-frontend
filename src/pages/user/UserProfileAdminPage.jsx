@@ -1,6 +1,6 @@
 import { Box, Flex, Spinner, Alert, AlertIcon } from "@chakra-ui/react";
 import HeaderWelcome from "../../components/welcome/HeaderWelcome";
-import UserProfile from "../../components/user/UserProfile"; 
+import UserProfile from "../../components/user/UserProfileAdmin"; 
 import useUserProfile from "../../hooks/user/useUserProfile"; 
 
 const UserProfilePage = () => {

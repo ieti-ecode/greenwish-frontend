@@ -30,8 +30,8 @@ const useUserProfile = () => {
   const updateUserProfile = async (updatedData) => {
     try {
       setLoading(true);
-      await request("PUT", `/users/${userId}`, updatedData);
-      setUser(updatedData);
+      const response = await request("PUT", `/users/${userId}`, updatedData);
+      setUser(response.data);
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -39,8 +39,31 @@ const useUserProfile = () => {
     }
   };
 
+  const uploadProfileImage = async (imageFile) => {
+    try {
+      if (!imageFile) {
+        console.error('No hay imagen seleccionada');
+        return;
+      }
 
-  return { user, loading, error, updateUserProfile };
+      const formData = new FormData();
+      formData.append('image', imageFile.image);
+
+      await request("POST", `/users/${userId}/image`, formData, 'multipart/form-data')
+      .then((response) => {
+        console.log('Imagen subida exitosamente');
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    } catch (err) {
+      console.error('Error al subir la imagen:', err.response?.data || err.message);
+    }
+  };
+
+
+  return { user, loading, error, updateUserProfile, uploadProfileImage };
 };
 
 export default useUserProfile;

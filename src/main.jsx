@@ -4,9 +4,8 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import './index.css';
 const HomePage = React.lazy(() => import("./pages/initial/HomePage"));
-const CompanyList = lazy(() => import("./components/company/CompanyList"));
 const MaterialList = lazy(() => import("./components/material/MaterialList"));
-const UserInformation = lazy(() => import("./components/user/UserProfile.jsx"));
+const UserProfilePage = lazy(() => import("./pages/user/UserProfilePage.jsx"));
 const ServicePage = React.lazy(() => import("./pages/initial/ServicePage"));
 const BenefitUser = lazy(() => import("./pages/benefit/BenefitUser.jsx"));
 const BenefitAdmin = lazy(() => import("./pages/benefit/BenefitAdmin.jsx"));
@@ -17,7 +16,9 @@ const SignInPage = React.lazy(() => import("./pages/initial/SignInPage.jsx"));
 const ClientPage = React.lazy(() => import("./pages/ClientPage"));
 const AdminPage = React.lazy(() => import("./pages/AdminPage"));
 const CompanyPage = React.lazy(() => import("./pages/CompaniesPage"));
-const App = React.lazy(() => import("./App"));
+const WelcomePage = React.lazy(() => import("./pages/welcome/WelcomePage"));
+const WelcomeClientPage = React.lazy(() => import("./pages/welcome/WelcomeClientPage"));
+const WelcomeCompanyPage = React.lazy(() => import("./pages/welcome/WelcomeCompanyPage"));
 
 const router = createBrowserRouter([
   {
@@ -42,8 +43,16 @@ const router = createBrowserRouter([
     element: <Suspense fallback={<div>Cargando...</div>}><ServicePage /></Suspense>,
   },
   {
-    path: "/app",
-    element: <Suspense fallback={<div>Cargando...</div>}><App /></Suspense>,
+    path: "/welcomeClient",
+    element: <Suspense fallback={<div>Cargando...</div>}><WelcomeClientPage /></Suspense>,
+  },
+  {
+    path: "/welcomeCompany",
+    element: <Suspense fallback={<div>Cargando...</div>}><WelcomeCompanyPage /></Suspense>,
+  },
+  {
+    path: "/welcome",
+    element: <Suspense fallback={<div>Cargando...</div>}><WelcomePage /></Suspense>,
   },
   {
     path: "/benefit",
@@ -63,8 +72,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/user",
-    element: <Suspense fallback={<div>Loading...</div>}><UserProfilePage /></Suspense>,
-},
+    element: <Suspense fallback={<div>Cargando...</div>}><UserProfilePage /></Suspense>,
+  },
   {
     path: "/client",
     element: <Suspense fallback={<div>Cargando...</div>}><ClientPage /></Suspense>,

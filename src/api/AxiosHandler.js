@@ -5,10 +5,8 @@ axios.defaults.baseURL = "http://localhost:8080/api/v1";
 export const getAuthToken = () => window.localStorage.getItem("token");
 export const getIdUser = () => window.localStorage.getItem("id");
 
-export const setAuthToken = (token) =>
-  window.localStorage.setItem("token", token);
-export const setIdUser = (id) =>
-  window.localStorage.setItem("id", id);
+export const setAuthToken = (token) => window.localStorage.setItem("token", token);
+export const setIdUser = (id) => window.localStorage.setItem("id", id);
 
 export const request = async (method, url, data, contentType = 'application/json') => {
   let headers = {};
@@ -17,14 +15,19 @@ export const request = async (method, url, data, contentType = 'application/json
   }
   return axios({
     method: method,
-    headers: 
-        ...headers,
-        'Content-Type': contentType,
+    headers: {
+      ...headers,
+      'Content-Type': contentType,
     },
     url: url,
     data: data,
   });
 };
+
+export const getAllUsers = () => request('get', '/users');
+export const createUser = (user) => request('post', '/users', user);
+export const updateUser = (id, user) => request('put', `/users/${id}`, user);
+export const deleteUser = (id) => request('delete', `/users/${id}`);
 
 
 export const getMaterials = () => request('get', '/materials');

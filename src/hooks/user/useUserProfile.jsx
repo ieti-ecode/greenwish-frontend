@@ -1,38 +1,44 @@
 import { useState, useEffect } from "react";
-import { request } from "../../api/AxiosHandler";
+import { request, getIdUser } from "../../api/AxiosHandler";
 
-const useUserProfile = (userId) => {
+const useUserProfile = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const userId = getIdUser();
 
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        setLoading(true); 
+        setLoading(true);
         const response = await request("GET", `/users/${userId}`);
-        setUser(response.data); 
-        setLoading(false); 
+        setUser(response.data);
+        setLoading(false);
       } catch (err) {
         setError(err);
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
-    fetchUserProfile();
-  }, [userId]); 
+    if (userId) {
+      fetchUserProfile();
+    } else {
+      setLoading(false);
+    }
+  }, [userId]);
 
   const updateUserProfile = async (updatedData) => {
     try {
-      setLoading(true); 
-      const response = await request("POST", `/users/${userId}`, updatedData);
-      setUser(response.data); 
-      setLoading(false); 
+      setLoading(true);
+      await request("PUT", `/users/${userId}`, updatedData);
+      setUser(updatedData);
+      setLoading(false);
     } catch (err) {
       setError(err);
       setLoading(false);
     }
   };
+
 
   return { user, loading, error, updateUserProfile };
 };

@@ -1,29 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { Box, Flex, Text, Avatar, Input, IconButton, InputGroup, InputRightElement, InputLeftElement, Button, Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { FaEye, FaEyeSlash, FaEdit, FaCheck, FaTimes } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaEdit, FaCheck, FaTimes, FaPencilAlt } from "react-icons/fa";
 import FormField from "../auth/FormField";
 import "./User.css";
+import UserProfileRoles from "./UserProfileRoles";
+import UserProfileImage from "./UserProfileImage";
 
 const UserProfile = (props) => {
   const { user, saveChanges } = props;
   const {
-    handleSubmit,
     register,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     getValues,
+    setValue 
   } = useForm({ mode: "onChange" });
   const [editedUser, setEditedUser] = useState({...user});
   const [isEditing, setIsEditing] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [selectedRole, setSelectedRole] = useState(editedUser.role);
+  const [imageFile, setImageFile] = useState(null);
+  const imageSrc = editedUser.image? `data:image/png;base64,${editedUser.image.data}` : "https://via.placeholder.com/150";
 
   useEffect(() => {
     setEditedUser(user);
   }, [user]);
 
-  const handleSaveClick = () => {
+  const handleSaveClick = async () => {
     setIsEditing(false);
-    saveChanges(editedUser);
+    await saveChanges(editedUser);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   const handleInputChange = (e) => {
@@ -32,31 +41,44 @@ const UserProfile = (props) => {
      ...prevState,
       [name]: value,
     }));
-  };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+    setValue(name, value);
   };
 
   const toggleEditMode = () => {
     setIsEditing(!isEditing);
   };
 
-  const cancelEdit = () => {
-    setEditedUser(user);
-    setIsEditing(false);
+  const handleRoleChange = (newRole) => {
+    setSelectedRole(newRole);
+    setEditedUser(prevState => ({
+     ...prevState,
+      role: newRole,
+    }));
   };
 
+  const handleImageUpload = (event) => {
+    setImageFile(event.target.files[0]);
+  };
+
+  const handleSaveImage = async () => {
+    console.log(imageFile);
+    // Aquí va la lógica para enviar el archivo de imagen al servidor
+  };
+
+
+
+  
   if (!user) {
     return <div>Cargando...</div>;
   }
 
   return (
     <Box p={5} boxShadow="md" bg="white" borderRadius="md" width="100%">
+      
       <Flex direction="column" alignItems="center">
         <Avatar 
           name={editedUser.name} 
-          src={editedUser.avatar || "https://via.placeholder.com/150"} 
+          src={editedUser.avatar} 
           size={{ base: "lg", md: "xl" }} 
           mb={4} 
         />
@@ -69,11 +91,13 @@ const UserProfile = (props) => {
               {user.email}
             </Text>
             <Text fontSize="md" color="gray.500" mb={2}>
-              Puntaje: {user.puntaje}
+              Puntaje: {user.points}
             </Text>
           </>
         ) : (
           <>
+            <UserProfileRoles selectedRole={selectedRole} handleRoleChange={handleRoleChange} />
+            <UserProfileImage imageFile={imageFile} setImageFile={setImageFile} handleSaveImage={handleSaveImage} />
             <FormField
               id="name"
               label="Nombre"
@@ -86,6 +110,7 @@ const UserProfile = (props) => {
               register={register}
               getValues={getValues}
               errors={errors}
+              onChange={handleInputChange}
             />
             <FormField
               id="email"
@@ -102,11 +127,12 @@ const UserProfile = (props) => {
               register={register}
               getValues={getValues}
               errors={errors}
+              onChange={handleInputChange}
             />
             <InputGroup>
               <FormField
                 id="password"
-                label="Contraseña"
+                label="Nueva Contraseña"
                 type={showPassword? "text" : "password"}
                 placeholder={showPassword? "********" : user.password}
                 validation={{
@@ -116,6 +142,7 @@ const UserProfile = (props) => {
                 register={register}
                 getValues={getValues}
                 errors={errors}
+                onChange={handleInputChange}
               />
               <InputRightElement width="7rem" height="6.5rem">
                 <IconButton aria-label="Toggle password visibility" 
@@ -127,6 +154,7 @@ const UserProfile = (props) => {
               </InputRightElement>
             </InputGroup>
           </>
+          
         )}
         <Box display="flex" justifyContent="space-between">
           <Button onClick={toggleEditMode} colorScheme="red">
@@ -138,6 +166,7 @@ const UserProfile = (props) => {
             </Button>
           )}
         </Box>
+        
       </Flex>
     </Box>
   );

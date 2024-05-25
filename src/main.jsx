@@ -4,10 +4,12 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import './index.css';
 const HomePage = React.lazy(() => import("./pages/initial/HomePage"));
-const BenefitList = lazy(() => import("./components/benefit/BenefitList"));
+const CompanyList = lazy(() => import("./components/company/CompanyList"));
 const MaterialList = lazy(() => import("./components/material/MaterialList"));
 const UserInformation = lazy(() => import("./components/user/UserInformation"));
 const ServicePage = React.lazy(() => import("./pages/initial/ServicePage"));
+const BenefitUser = lazy(() => import("./pages/benefit/BenefitUser.jsx"));
+const BenefitAdmin = lazy(() => import("./pages/benefit/BenefitAdmin.jsx"));
 const Errorpage = React.lazy(() => import("./pages/ErrorPage"));
 const AlliedPage = React.lazy(() => import("./pages/initial/AlliedPage.jsx"));
 const SignUpPage = React.lazy(() => import("./pages/initial/SignUpPage.jsx"));
@@ -45,7 +47,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/benefit",
-    element: <Suspense fallback={<div>Cargando...</div>}><BenefitList /></Suspense>,
+    element: <Suspense fallback={<div>Loading...</div>}><BenefitUser /></Suspense>,
+  },
+  {
+    path: "/benefitAdmin",
+    element: <Suspense fallback={<div>Loading...</div>}><BenefitAdmin /></Suspense>,
   },
   {
     path: "/company",

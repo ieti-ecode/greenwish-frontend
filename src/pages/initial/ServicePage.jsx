@@ -1,6 +1,7 @@
 import { Box, Card, CardBody, CardHeader, Center, Heading, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react'
 import { ServiceList } from '../../components/initial/ServiceList';
 import Header from '../../components/initial/Header';
+import Contact from '../../components/initial/Contact';
 
 export default function ServicePage() {
 
@@ -52,6 +53,7 @@ export default function ServicePage() {
             <Heading mt="9" as="h2" size="xl" mb="8" fontSize="4xl" ml="2" bgGradient="linear(to-l, green.300, green.500)" bgClip="text" textAlign="center" >Para las Empresas</Heading>
 
             <ServiceList list={serviceListCompany} />
+            <Contact />
         </Box>
     )
 }

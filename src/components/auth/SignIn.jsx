@@ -12,14 +12,16 @@ const SignIn = () => {
     formState: { errors, isSubmitting },
     getValues,
   } = useForm({ mode: "onChange" });
+  
 
   function onSubmit(values) {
-    request("POST", "/auth", {
+    request("POST", "/auth/signin", {
       email: values.email,
       password: values.password,
     })
       .then((response) => {
         setAuthToken(response.data.token);
+        localStorage.setItem('userId', response.data.id);
       })
       .catch((error) => {
         console.log(error);

@@ -35,8 +35,8 @@ const SignUp = () => {
         type="text"
         placeholder="Tu nombre completo"
         validation={{
-          required: "This is required",
-          minLength: { value: 4, message: "Minimum length should be 4" },
+          required: "El campo es obligatorio",
+          minLength: { value: 4, message: "La longitud mínima debe ser 4" },
         }}
         register={register}
         getValues={getValues}
@@ -48,10 +48,10 @@ const SignUp = () => {
         type="email"
         placeholder="Tu correo electrónico"
         validation={{
-          required: "This is required",
+          required: "El campo es obligatorio",
           pattern: {
             value: /\S+@\S+\.\S+/,
-            message: "Entered value does not match email format",
+            message: "El valor ingresado no coincide con el formato de correo electrónico",
           },
         }}
         register={register}
@@ -64,8 +64,8 @@ const SignUp = () => {
         type="password"
         placeholder="Tu contraseña"
         validation={{
-          required: "This is required",
-          minLength: { value: 4, message: "Minimum length should be 4" },
+          required: "El campo es obligatorio",
+          minLength: { value: 4, message: "La longitud mínima debe ser 4" },
         }}
         register={register}
         getValues={getValues}
@@ -77,10 +77,10 @@ const SignUp = () => {
         type="password"
         placeholder="Confirma tu contraseña"
         validation={{
-          required: "This is required",
-          minLength: { value: 4, message: "Minimum length should be 4" },
+          required: "El campo es obligatorio",
+          minLength: { value: 4, message: "La longitud mínima debe ser 4" },
           validate: (value) =>
-            value === getValues("password") || "The passwords do not match",
+            value === getValues("password") || "Las contraseñas no coinciden",
         }}
         register={register}
         getValues={getValues}

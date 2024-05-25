@@ -7,7 +7,7 @@ const HomePage = React.lazy(() => import("./pages/initial/HomePage"));
 const BenefitList = lazy(() => import("./components/benefit/BenefitList"));
 const CompanyList = lazy(() => import("./components/company/CompanyList"));
 const MaterialList = lazy(() => import("./components/material/MaterialList"));
-const UserInformation = lazy(() => import("./components/user/UserInformation"));
+const UserInformation = lazy(() => import("./components/user/UserProfile.jsx"));
 const ServicePage = React.lazy(() => import("./pages/initial/ServicePage"));
 const Errorpage = React.lazy(() => import("./pages/ErrorPage"));
 const SignUpPage = React.lazy(() => import("./pages/SignUpPage.jsx"));
@@ -16,6 +16,7 @@ const ClientPage = React.lazy(() => import("./pages/ClientPage"));
 const AdminPage = React.lazy(() => import("./pages/AdminPage"));
 const App = React.lazy(() => import("./App"));
 import './index.css'
+import UserProfilePage from "./pages/user/UserProfilePage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/user",
-    element: <Suspense fallback={<div>Loading...</div>}><UserInformation /></Suspense>,
+    element: <Suspense fallback={<div>Loading...</div>}><UserProfilePage /></Suspense>,
   },
   {
     path: "/client",

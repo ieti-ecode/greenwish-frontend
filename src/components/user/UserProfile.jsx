@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Box, Flex, Text, Avatar, Input, IconButton, InputGroup, InputRightElement, InputLeftElement, Button, Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash, FaEdit, FaCheck, FaTimes, FaPencilAlt } from "react-icons/fa";
@@ -26,30 +26,18 @@ const UserProfile = (props) => {
     setEditedUser(user);
   }, [user]);
 
-  const handleSaveClick = async () => {
-    setIsEditing(false);
-    const updatedData = {
-     ...editedUser,
-      isCompany: selectedRole,
-    };
-    console.log(updatedData);
-    await saveChanges(updatedData);
-    if (imageFile) {
-      await uploadProfileImage(imageFile);
-    }
+  const handleSaveClick = () => {
+    saveChanges(editedUser);
+    toggleEditMode();
   };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setEditedUser(prevState => ({
-     ...prevState,
-      [name]: value,
-    }));
-    setValue(name, value);
+  const handleInputChange = (event) => {
+    const { id, value } = event.target;
+    setEditedUser((prevState) => ({ ...prevState, [id]: value }));
   };
 
   const toggleEditMode = () => {
@@ -71,7 +59,7 @@ const UserProfile = (props) => {
       <Flex direction="column" alignItems="center">
         <Avatar 
           name={editedUser.name} 
-          src={editedUser.avatar} 
+          src={imageSrc} 
           size={{ base: "lg", md: "xl" }} 
           mb={4} 
         />

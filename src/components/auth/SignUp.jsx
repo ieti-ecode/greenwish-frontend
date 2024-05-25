@@ -1,4 +1,4 @@
-import { Button, Flex, Icon, Box, Image } from "@chakra-ui/react";
+import { Button, Flex, Icon, Box, Image, Switch, FormControl, FormLabel } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import FormField from "./FormField";
@@ -17,9 +17,11 @@ const SignUp = () => {
       name: values.name,
       email: values.email,
       password: values.password,
+      isCompany: values.isCompany,
     })
       .then((response) => {
         alert("User created successfully");
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -85,6 +87,14 @@ const SignUp = () => {
         getValues={getValues}
         errors={errors}
       />
+
+      <FormControl display='flex' alignItems='center'>
+        <FormLabel htmlFor='email-alerts' mb='0'>
+          ¿Eres una empresa de reciclaje?
+        </FormLabel>
+        <Switch id='email-alerts' {...register("isCompany")}/>
+      </FormControl>
+
       <Button mt={4} colorScheme="teal" isLoading={isSubmitting} type="submit">
         Registrarse
       </Button>

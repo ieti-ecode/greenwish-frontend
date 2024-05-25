@@ -31,6 +31,7 @@ const useUserProfile = () => {
     try {
       setLoading(true);
       const response = await request("PUT", `/users/${userId}`, updatedData);
+      
       setUser(response.data);
       setLoading(false);
     } catch (err) {
@@ -52,6 +53,7 @@ const useUserProfile = () => {
       await request("POST", `/users/${userId}/image`, formData, 'multipart/form-data')
       .then((response) => {
         console.log('Imagen subida exitosamente');
+        window.location.reload();
         console.log(response.data);
       })
       .catch((error) => {

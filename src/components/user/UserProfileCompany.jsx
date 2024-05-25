@@ -71,7 +71,7 @@ const UserProfile = (props) => {
       <Flex direction="column" alignItems="center">
         <Avatar 
           name={editedUser.name} 
-          src={editedUser.avatar} 
+          src={imageSrc} 
           size={{ base: "lg", md: "xl" }} 
           mb={4} 
         />

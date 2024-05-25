@@ -17,6 +17,12 @@ export const Menu = () => {
                     </Link>
                 </ListItem>
                 <ListItem>
+                    <Link to="/allUsers" style={{ display: 'flex', alignItems: 'center' }}>
+                        <Icon as={AtSignIcon} boxSize={5} mr="2" color='green.500' />
+                        <Text bgGradient="linear(to-l, green.300, green.500)" bgClip="text" fontWeight="bold" fontSize='xl'>Clientes</Text>
+                    </Link>
+                </ListItem>
+                <ListItem>
                     <Link to="/benefit" style={{ display: 'flex', alignItems: 'center' }}>
                         <Icon as={CheckIcon} boxSize={5} mr="2" color='green.500' />
                         <Text bgGradient="linear(to-l, green.300, green.500)" bgClip="text" fontWeight="bold" fontSize='xl'>Beneficios</Text>

@@ -1,57 +1,99 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Box, VStack, Input, Button, Text, Flex } from '@chakra-ui/react';
 import MaterialCard from '../components/MaterialCard';
-import MaterialForm from '../components/MaterialForm';
-import './AdminPage.css';
-
-const initialMaterials = [
-  { id: 1, name: 'Plástico', description: 'Botellas y envases de plástico', valuePerKilo: 500, image: '/images/plastico.jpg' },
-  { id: 2, name: 'Papel', description: 'Papel de oficina y periódicos', valuePerKilo: 200, image: '/images/papel.jpg' },
-  { id: 3, name: 'Plástico', description: 'Botellas y envases de plástico', valuePerKilo: 500, image: '/images/plastico.jpg' },
-  { id: 4, name: 'Papel', description: 'Papel de oficina y periódicos', valuePerKilo: 200, image: '/images/papel.jpg' },
-  { id: 5, name: 'Plástico', description: 'Botellas y envases de plástico', valuePerKilo: 500, image: '/images/plastico.jpg' },
-  { id: 6, name: 'Papel', description: 'Papel de oficina y periódicos', valuePerKilo: 200, image: '/images/papel.jpg' },
-  { id: 7, name: 'Plástico', description: 'Botellas y envases de plástico', valuePerKilo: 500, image: '/images/plastico.jpg' },
-  { id: 8, name: 'Papel', description: 'Papel de oficina y periódicos', valuePerKilo: 200, image: '/images/papel.jpg' },
-  { id: 9, name: 'Plástico', description: 'Botellas y envases de plástico', valuePerKilo: 500, image: '/images/plastico.jpg' },
-  { id: 10, name: 'Papel', description: 'Papel de oficina y periódicos', valuePerKilo: 200, image: '/images/papel.jpg' },
-  { id: 11, name: 'Plástico', description: 'Botellas y envases de plástico', valuePerKilo: 500, image: '/images/plastico.jpg' },
-  { id: 12, name: 'Papel', description: 'Papel de oficina y periódicos', valuePerKilo: 200, image: '/images/papel.jpg' },
-  { id: 13, name: 'Plástico', description: 'Botellas y envases de plástico', valuePerKilo: 500, image: '/images/plastico.jpg' },
-  { id: 14, name: 'Papel', description: 'Papel de oficina y periódicos', valuePerKilo: 200, image: '/images/papel.jpg' },
-];
+import { getMaterials, createMaterial, updateMaterial, updateImageMaterial, deleteMaterial } from "../api/AxiosHandler";
 
 const AdminPage = () => {
-  const [materials, setMaterials] = useState(initialMaterials);
-  const [currentMaterial, setCurrentMaterial] = useState(null);
+  const [materials, setMaterials] = useState([]);
+  const [form, setForm] = useState({ name: '', description: '', kiloValue: '', image: '' });
+  const [editingMaterial, setEditingMaterial] = useState(null);
 
-  const handleSave = (material) => {
-    if (material.id) {
-      setMaterials(materials.map(m => (m.id === material.id ? material : m)));
+  useEffect(() => {
+    const fetchMaterials = async () => {
+      const response = await getMaterials();
+      setMaterials(response.data);
+    };
+    fetchMaterials();
+  }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleSubmit = async () => {
+    if (editingMaterial) {
+      await updateMaterial(editingMaterial.id, form);
+      const formData = new FormData();
+      formData.append('image', form.image)
+      await updateImageMaterial(editingMaterial.id, formData);
+      setMaterials(materials.map(m => m.id === editingMaterial.id ? { ...editingMaterial, ...form } : m));
+      setEditingMaterial(null);
     } else {
-      material.id = materials.length + 1;
-      setMaterials([...materials, material]);
+      const response = await createMaterial(form);
+      const formData = new FormData();
+      formData.append('image', form.image)
+      await updateImageMaterial(response.data.id, formData);
+      setMaterials([...materials, response.data]);
     }
-    setCurrentMaterial(null);
+    setForm({ name: '', description: '', kiloValue: '', image: '' });
   };
 
   const handleEdit = (material) => {
-    setCurrentMaterial(material);
+    setForm(material);
+    setEditingMaterial(material);
   };
 
-  const handleDelete = (id) => {
-    setMaterials(materials.filter(material => material.id !== id));
+  const handleDelete = async (id) => {
+    await deleteMaterial(id);
+    setMaterials(materials.filter(m => m.id !== id));
   };
 
   return (
-    <div className="admin-page">
-      <h1>Administración de Materiales</h1>
-      <MaterialForm currentMaterial={currentMaterial} onSave={handleSave} />
-      <div className="materials-grid">
-        {materials.map((material) => (
-          <MaterialCard key={material.id} material={material} onEdit={handleEdit} onDelete={handleDelete} />
+    <Flex direction="column" align="center">
+      <Text fontSize="3xl" fontWeight="bold" mb="4">Administración de Materiales</Text>
+      <Box p="4" bg="white" borderRadius="md" boxShadow="md" mb="4" width="90%" maxWidth="500px">
+        <Text fontSize="2xl" mb="4">{editingMaterial ? 'Editar Material' : 'Agregar Material'}</Text>
+        <VStack spacing="4" align="stretch">
+          <Input
+            placeholder="Nombre"
+            name="name"
+            value={form.name}
+            onChange={handleInputChange}
+          />
+          <Input
+            placeholder="Descripción"
+            name="description"
+            value={form.description}
+            onChange={handleInputChange}
+          />
+          <Input
+            placeholder="Valor por Kilo"
+            name="kiloValue"
+            value={form.kiloValue}
+            onChange={handleInputChange}
+          />
+          <Input
+            type="file"
+            name="imageUrl"
+            onChange={(e) => setForm({ ...form, image: e.target.files[0]})}
+          />
+          <Button colorScheme="green" onClick={handleSubmit}>
+            {editingMaterial ? 'Actualizar' : 'Agregar'}
+          </Button>
+        </VStack>
+      </Box>
+      <Flex wrap="wrap" justify="center" gap="4" width="100%">
+        {materials.map(material => (
+          <MaterialCard
+            key={material.id}
+            material={material}
+            onEdit={() => handleEdit(material)}
+            onDelete={() => handleDelete(material.id)}
+          />
         ))}
-      </div>
-    </div>
+      </Flex>
+    </Flex>
   );
 };
 

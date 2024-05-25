@@ -14,7 +14,7 @@ const SignIn = () => {
   } = useForm({ mode: "onChange" });
 
   function onSubmit(values) {
-    request("POST", "/auth", {
+    request("POST", "/auth/signin", {
       email: values.email,
       password: values.password,
     })

@@ -1,5 +1,4 @@
-import { ArrowBackIcon } from "@chakra-ui/icons";
-import { Box, Button, Flex, Icon, Image } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { request, setAuthToken, setIdUser } from "../../api/AxiosHandler";

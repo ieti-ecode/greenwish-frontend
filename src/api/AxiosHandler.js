@@ -17,11 +17,19 @@ export const request = async (method, url, data, contentType = 'application/json
   }
   return axios({
     method: method,
-    headers: {
-      ... headers,
-      'Content-Type': contentType,
+    headers: 
+        ...headers,
+        'Content-Type': contentType,
     },
     url: url,
     data: data,
   });
 };
+
+
+export const getMaterials = () => request('get', '/materials');
+export const getMaterial = (id) => request('get', `/materials/${id}`);
+export const createMaterial = (material) => request('post', '/materials', material);
+export const updateImageMaterial = (id, image) => request('post', `/materials/${id}/image`, image, 'multipart/form-data');
+export const updateMaterial = (id, material) => request('put', `/materials/${id}`, material);
+export const deleteMaterial = (id) => request('delete', `/materials/${id}`);

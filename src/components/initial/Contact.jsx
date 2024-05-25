@@ -1,12 +1,13 @@
 import { Box, Flex, Heading, HStack, Image, Text } from "@chakra-ui/react";
 import { PhoneIcon, EmailIcon, EditIcon } from '@chakra-ui/icons';
+import contactImage from '../../assets/green.png';
 
-export const Contact = () => {
+const Contact = () => {
     return (
         <Flex direction="row" justify="space-around" mt="10" alignItems="center" background="gray.50">
                 <Box mr="5">
                     <Heading as="h2" size="xl" mb="8" fontSize="4xl" ml="2" bgGradient="linear(to-l, green.300, green.500)" bgClip="text">Contáctanos</Heading>
-                    <Image src="src\assets\green.png" alt="GreenWish" boxSize="200px" />
+                    <Image src={contactImage} alt="GreenWish" boxSize="200px" />
                 </Box>
                 <Box>
                     <HStack spacing="2" align="center">
@@ -34,3 +35,5 @@ export const Contact = () => {
             </Flex>
     )
 }
+
+export default Contact

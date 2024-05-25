@@ -14,7 +14,9 @@ const AlliedPage = () => {
                 </VStack>
             </Box>
             <Heading as="h2" size="xl" mb="8" fontSize="4xl" ml="2" bgGradient="linear(to-l, green.300, green.500)" bgClip="text" textAlign="center">Empresas que nos acompañan en este reto</Heading>
-            <CompaniesList/>
+            <Box width="100%" display="flex" justifyContent="center" alignItems="center" flexDirection="column" mb={-5}>
+                <CompaniesList/>
+            </Box>
             <Contact />
         </Box>
     );

@@ -5,7 +5,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import './index.css';
 const HomePage = React.lazy(() => import("./pages/initial/HomePage"));
 const BenefitList = lazy(() => import("./components/benefit/BenefitList"));
-const CompanyList = lazy(() => import("./components/company/CompanyList"));
 const MaterialList = lazy(() => import("./components/material/MaterialList"));
 const UserInformation = lazy(() => import("./components/user/UserInformation"));
 const ServicePage = React.lazy(() => import("./pages/initial/ServicePage"));
@@ -15,6 +14,7 @@ const SignUpPage = React.lazy(() => import("./pages/initial/SignUpPage.jsx"));
 const SignInPage = React.lazy(() => import("./pages/initial/SignInPage.jsx"));
 const ClientPage = React.lazy(() => import("./pages/ClientPage"));
 const AdminPage = React.lazy(() => import("./pages/AdminPage"));
+const CompanyPage = React.lazy(() => import("./pages/CompaniesPage"));
 const App = React.lazy(() => import("./App"));
 
 const router = createBrowserRouter([
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/company",
-    element: <Suspense fallback={<div>Cargando...</div>}><CompanyList /></Suspense>,
+    element: <Suspense fallback={<div>Cargando...</div>}><CompanyPage /></Suspense>,
   },
   {
     path: "/material",

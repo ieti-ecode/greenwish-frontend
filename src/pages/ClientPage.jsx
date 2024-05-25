@@ -39,12 +39,12 @@ const ClientPage = () => {
 
   return (
     <Flex direction="column" align="center">
+      <Text fontSize="3xl" fontWeight="bold" mb="4">Materiales Disponibles</Text>
       <SelectedMaterials
         selectedMaterials={selectedMaterials}
         onQuantityChange={handleQuantityChange}
         onRemove={handleRemove}
       />
-      <Text fontSize="3xl" fontWeight="bold" mb="4">Materiales Disponibles</Text>
       <Flex wrap="wrap" justify="center" gap="4">
         {materials.map(material => (
           <MaterialCard key={material.id} material={material} onAdd={handleAdd} />

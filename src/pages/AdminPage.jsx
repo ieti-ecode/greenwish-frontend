@@ -28,9 +28,7 @@ const AdminPage = () => {
 
   const handleSubmit = async () => {
     let newMaterial;
-
     if (editingMaterial) {
-      // Actualizar material existente
       await updateMaterial(editingMaterial.id, form);
       if (form.image) {
         const formData = new FormData();
@@ -41,7 +39,6 @@ const AdminPage = () => {
       setMaterials(materials.map(m => m.id === newMaterial.data.id ? newMaterial.data : m));
       setEditingMaterial(null);
     } else {
-      // Crear nuevo material
       const response = await createMaterial(form);
       if (form.image) {
         const formData = new FormData();

@@ -14,6 +14,9 @@ import { EditBenefitPopup } from "./EditBenefitPopup";
 
 export const CardBenefitAdmin = (props) => {
   const { id, title, description, imageURL, points } = props;
+  console.log(imageURL);
+  const imagebase64 = imageURL && imageURL.data ? "data:image/png;base64," + imageURL.data : "";
+
   const formatNumberWithDots = (value) => {
     return Number(value).toLocaleString("es-ES");
   };
@@ -31,7 +34,7 @@ export const CardBenefitAdmin = (props) => {
       <Image
         objectFit="cover"
         maxW={{ base: "100%", sm: "180px" }}
-        src={imageURL}
+        src={imagebase64}
       />
       <Stack spacing={0} p={0}>
         <CardHeader pb={1}>

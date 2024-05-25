@@ -39,9 +39,9 @@ export const EditBenefitPopup = ({ id, title, description, points }) => {
   }
   function onSubmitImg() {
     const fromData = new FormData();
-    fromData.append('image', imageN);
-    console.log(imageN)
-    request("PUT", "/benefits/" + id+"/image", fromData)
+    fromData.append('image', imageN.image);
+    console.log(id, imageN)
+    request("POST", "/benefits/" + id+"/image", fromData, 'multipart/from-data')
       .then((response) => {
         console.log(response.data);
       })
@@ -100,9 +100,9 @@ export const EditBenefitPopup = ({ id, title, description, points }) => {
               </Text>
               <Input
                 type="file"
+                name="image"
                 focusBorderColor="lime"
-                value={imageN}
-                onChange={(e) => setImage(e.target.value)}
+                onChange={(e) => setImage({...imageN, image: e.target.files[0]})}
               />
               <Button
                 colorScheme="green"

@@ -14,7 +14,7 @@ export const GridCards = (props) => {
                 key={index}
                 title={card.name}
                 description={card.description}
-                imageURL={card.imageURL}
+                imageURL={card.image}
                 points={card.value}
               />
             );

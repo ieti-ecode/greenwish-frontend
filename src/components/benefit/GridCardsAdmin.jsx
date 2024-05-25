@@ -17,7 +17,7 @@ export const GridCardsAdmin = (props) => {
                 id={card.id}
                 title={card.name}
                 description={card.description}
-                imageURL={card.imageURL}
+                imageURL={card.image}
                 points={card.value}
               />
             );

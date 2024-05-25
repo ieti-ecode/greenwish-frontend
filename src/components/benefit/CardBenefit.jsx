@@ -12,7 +12,9 @@ import { ClaimBenefitPopup } from "./ClaimBenefitPopup";
 
 export const CardBenefit = (props) => {
   const { title, description, imageURL, points } = props;
-
+  console.log(imageURL);
+  const imagebase64 =
+    imageURL && imageURL.data ? "data:image/png;base64," + imageURL.data : "";
   const formatNumberWithDots = (value) => {
     return Number(value).toLocaleString("es-ES");
   };
@@ -30,7 +32,7 @@ export const CardBenefit = (props) => {
       <Image
         objectFit="cover"
         maxW={{ base: "100%", sm: "180px" }}
-        src={imageURL}
+        src={imagebase64}
       />
       <Stack spacing={0} p={0}>
         <CardHeader pb={1}>
@@ -43,7 +45,11 @@ export const CardBenefit = (props) => {
           </Text>
         </CardBody>
         <CardFooter pt={0} justifyContent="center">
-          <ClaimBenefitPopup title={title} description={description} points={points} />
+          <ClaimBenefitPopup
+            title={title}
+            description={description}
+            points={points}
+          />
         </CardFooter>
       </Stack>
     </Card>

@@ -28,16 +28,17 @@ export const CreateBenefitPopup = () => {
     request("POST", "/benefits", {
       name: titleN,
       description: descriptionN,
-      value: pointsN
+      value: pointsN,
     })
       .then((response) => {
-        request("POST", "/benefits/"+response.data.id, {
-          name: titleN,
-          description: descriptionN,
-          value: pointsN,
-          image: imageN
-
-        })
+        const fromData = new FormData();
+        fromData.append("image", imageN.image);
+        request(
+          "POST",
+          `/benefits/${response.data.id}/image`,
+          fromData,
+          "multipart/from-data"
+        );
       })
       .catch((error) => {
         console.log(error);
@@ -95,8 +96,9 @@ export const CreateBenefitPopup = () => {
               <Input
                 type="file"
                 focusBorderColor="lime"
-                value={imageN}
-                onChange={(e) => setImage(e.target.value)}
+                onChange={(e) =>
+                  setImage({ ...imageN, image: e.target.files[0] })
+                }
               />
             </Box>
           </ModalBody>

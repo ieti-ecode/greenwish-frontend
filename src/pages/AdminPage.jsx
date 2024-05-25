@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, VStack, Input, Button, Text, Flex } from '@chakra-ui/react';
 import MaterialCard from '../components/MaterialCard';
-import { getMaterials, createMaterial, updateMaterial, updateImageMaterial, deleteMaterial } from "../api/AxiosHandler";
+import { getMaterials, createMaterial, updateMaterial, updateImageMaterial, deleteMaterial, getMaterial } from "../api/AxiosHandler";
 
 const AdminPage = () => {
   const [materials, setMaterials] = useState([]);
@@ -21,26 +21,48 @@ const AdminPage = () => {
     setForm({ ...form, [name]: value });
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setForm({ ...form, image: file });
+  };
+
   const handleSubmit = async () => {
+    let newMaterial;
+
     if (editingMaterial) {
+      // Actualizar material existente
       await updateMaterial(editingMaterial.id, form);
-      const formData = new FormData();
-      formData.append('image', form.image)
-      await updateImageMaterial(editingMaterial.id, formData);
-      setMaterials(materials.map(m => m.id === editingMaterial.id ? { ...editingMaterial, ...form } : m));
+      if (form.image) {
+        const formData = new FormData();
+        formData.append('image', form.image);
+        await updateImageMaterial(editingMaterial.id, formData);
+      }
+      newMaterial = await getMaterial(editingMaterial.id);
+      setMaterials(materials.map(m => m.id === newMaterial.data.id ? newMaterial.data : m));
       setEditingMaterial(null);
     } else {
+      // Crear nuevo material
       const response = await createMaterial(form);
-      const formData = new FormData();
-      formData.append('image', form.image)
-      await updateImageMaterial(response.data.id, formData);
-      setMaterials([...materials, response.data]);
+      if (form.image) {
+        const formData = new FormData();
+        formData.append('image', form.image);
+        await updateImageMaterial(response.data.id, formData);
+      }
+      newMaterial = await getMaterial(response.data.id);
+      setMaterials([...materials, newMaterial.data]);
     }
+
     setForm({ name: '', description: '', kiloValue: '', image: '' });
   };
 
   const handleEdit = (material) => {
-    setForm(material);
+    setForm({
+      id: material.id,
+      name: material.name,
+      description: material.description,
+      kiloValue: material.kiloValue,
+      image: ''
+    });
     setEditingMaterial(material);
   };
 
@@ -75,8 +97,8 @@ const AdminPage = () => {
           />
           <Input
             type="file"
-            name="imageUrl"
-            onChange={(e) => setForm({ ...form, image: e.target.files[0]})}
+            name="image"
+            onChange={handleFileChange}
           />
           <Button colorScheme="green" onClick={handleSubmit}>
             {editingMaterial ? 'Actualizar' : 'Agregar'}

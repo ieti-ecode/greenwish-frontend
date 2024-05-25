@@ -3,11 +3,13 @@ import { Box, VStack, Text, Button, Image, HStack } from '@chakra-ui/react';
 import './MaterialCard.css';
 
 const MaterialCard = ({ material, onAdd, onEdit, onDelete }) => {
+  const imageUrl = material.image && material.image.data ? `data:image/png;base64,${material.image.data}` : null;
+
   return (
     <Box p="4" bg="white" borderRadius="md" boxShadow="md" width="250px">
       <VStack spacing="4" align="center">
         <Image
-          src={material.image}
+          src={imageUrl}
           alt={material.name}
           className="card-image"
         />

@@ -30,7 +30,7 @@ export const EditBenefitPopup = ({ id, title, description, points }) => {
       value: pointsN,
     })
       .then((response) => {
-        
+        window.location.reload();
         console.log(response.data);
       })
       .catch((error) => {

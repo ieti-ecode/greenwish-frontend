@@ -12,7 +12,6 @@ import { ClaimBenefitPopup } from "./ClaimBenefitPopup";
 
 export const CardBenefit = (props) => {
   const { title, description, imageURL, points } = props;
-  console.log(imageURL);
   const imagebase64 =
     imageURL && imageURL.data ? "data:image/png;base64," + imageURL.data : "";
   const formatNumberWithDots = (value) => {

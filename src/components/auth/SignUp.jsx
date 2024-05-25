@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import FormField from "./FormField";
 import { request } from "../../api/AxiosHandler";
-import { ArrowBackIcon } from "@chakra-ui/icons";
 
 const SignUp = () => {
   const {

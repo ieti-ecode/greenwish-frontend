@@ -22,7 +22,17 @@ const SignIn = () => {
         setAuthToken(response.data.token);
         console.log(response.data);
         setIdUser(response.data.userId);
-        //setIdUser('66512623e1baab6d9dcf7297');
+        request("GET", `/users/${response.data.userId}`).then((response) => {
+          console.log(response.data);
+          let role = response.data.role;
+          if (role === "Administrator") {
+            window.location.href = "/welcome";
+          } else if (role === "Customer") {
+            window.location.href = "/welcomeClient";
+          } else if (role === "Company") {
+            window.location.href = "/welcomeCompany";
+          }
+        })
       })
       .catch((error) => {
         console.log(error);

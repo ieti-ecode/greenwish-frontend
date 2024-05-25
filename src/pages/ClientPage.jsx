@@ -1,34 +1,56 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Box, VStack, Text, Flex } from '@chakra-ui/react';
 import MaterialCard from '../components/MaterialCard';
-import './ClientPage.css';
-
-const materials = [
-  { id: 1, name: 'Plástico', description: 'Botellas y envases de plástico', valuePerKilo: 500, image: '/images/plastico.jpg' },
-  { id: 2, name: 'Papel', description: 'Papel de oficina y periódicos', valuePerKilo: 200, image: '/images/papel.jpg' },
-  { id: 3, name: 'Plástico', description: 'Botellas y envases de plástico', valuePerKilo: 500, image: '/images/plastico.jpg' },
-  { id: 4, name: 'Papel', description: 'Papel de oficina y periódicos', valuePerKilo: 200, image: '/images/papel.jpg' },
-  { id: 5, name: 'Plástico', description: 'Botellas y envases de plástico', valuePerKilo: 500, image: '/images/plastico.jpg' },
-  { id: 6, name: 'Papel', description: 'Papel de oficina y periódicos', valuePerKilo: 200, image: '/images/papel.jpg' },
-  { id: 7, name: 'Plástico', description: 'Botellas y envases de plástico', valuePerKilo: 500, image: '/images/plastico.jpg' },
-  { id: 8, name: 'Papel', description: 'Papel de oficina y periódicos', valuePerKilo: 200, image: '/images/papel.jpg' },
-  { id: 9, name: 'Plástico', description: 'Botellas y envases de plástico', valuePerKilo: 500, image: '/images/plastico.jpg' },
-  { id: 10, name: 'Papel', description: 'Papel de oficina y periódicos', valuePerKilo: 200, image: '/images/papel.jpg' },
-  { id: 11, name: 'Plástico', description: 'Botellas y envases de plástico', valuePerKilo: 500, image: '/images/plastico.jpg' },
-  { id: 12, name: 'Papel', description: 'Papel de oficina y periódicos', valuePerKilo: 200, image: '/images/papel.jpg' },
-  { id: 13, name: 'Plástico', description: 'Botellas y envases de plástico', valuePerKilo: 500, image: '/images/plastico.jpg' },
-  { id: 14, name: 'Papel', description: 'Papel de oficina y periódicos', valuePerKilo: 200, image: '/images/papel.jpg' },
-];
+import SelectedMaterials from '../components/SelectedMaterials';
+import { getMaterials } from "../api/AxiosHandler";
 
 const ClientPage = () => {
+  const [materials, setMaterials] = useState([]);
+  const [selectedMaterials, setSelectedMaterials] = useState([]);
+
+  useEffect(() => {
+    const fetchMaterials = async () => {
+      const response = await getMaterials();
+      setMaterials(response.data);
+    };
+    fetchMaterials();
+  }, []);
+
+  const handleAdd = (material) => {
+    const updatedMaterials = [...selectedMaterials];
+    const materialIndex = updatedMaterials.findIndex(m => m.id === material.id);
+    if (materialIndex > -1) {
+      updatedMaterials[materialIndex].quantity += 1;
+    } else {
+      updatedMaterials.push({ ...material, quantity: 1 });
+    }
+    setSelectedMaterials(updatedMaterials);
+  };
+
+  const handleQuantityChange = (materialId, quantity) => {
+    setSelectedMaterials(selectedMaterials.map(m =>
+      m.id === materialId ? { ...m, quantity } : m
+    ));
+  };
+
+  const handleRemove = (materialId) => {
+    setSelectedMaterials(selectedMaterials.filter(m => m.id !== materialId));
+  };
+
   return (
-    <div className="client-page">
-      <h1>Materiales Disponibles para Reciclar</h1>
-      <div className="materials-grid">
-        {materials.map((material) => (
-          <MaterialCard key={material.id} material={material} />
+    <Flex direction="column" align="center">
+      <Text fontSize="3xl" fontWeight="bold" mb="4">Materiales Disponibles</Text>
+      <SelectedMaterials
+        selectedMaterials={selectedMaterials}
+        onQuantityChange={handleQuantityChange}
+        onRemove={handleRemove}
+      />
+      <Flex wrap="wrap" justify="center" gap="4">
+        {materials.map(material => (
+          <MaterialCard key={material.id} material={material} onAdd={handleAdd} />
         ))}
-      </div>
-    </div>
+      </Flex>
+    </Flex>
   );
 };
 

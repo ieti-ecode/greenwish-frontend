@@ -1,8 +1,7 @@
-import { ArrowBackIcon } from "@chakra-ui/icons";
-import { Box, Button, Flex, Icon, Image } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { request, setAuthToken } from "../../api/AxiosHandler";
+import { request, setAuthToken, setIdUser } from "../../api/AxiosHandler";
 import FormField from "./FormField";
 
 const SignIn = () => {
@@ -21,7 +20,7 @@ const SignIn = () => {
     })
       .then((response) => {
         setAuthToken(response.data.token);
-        localStorage.setItem('userId', response.data.id);
+        setIdUser(response.data.userId);
       })
       .catch((error) => {
         console.log(error);

@@ -1,15 +1,16 @@
-import React from 'react'
-import { Flex, Box, Image, Icon } from '@chakra-ui/react'
 import { ArrowBackIcon } from '@chakra-ui/icons'
+import { Box, Flex, Icon, Image } from '@chakra-ui/react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import SignUp from '../components/auth/SignUp'
-import Header from '../components/initial/Header'
+import SignUp from '../../components/auth/SignUp'
+import Contact from '../../components/initial/Contact'
+import Header from '../../components/initial/Header'
 
 const SignUpPage = () => {
   return (
-    <>
+    <Box width="100vw" height="100vh" display="flex" flexDirection="column">
         <Header />
-        <Flex minHeight="100vh" alignItems="center" justifyContent="center" bg="gray.50">
+        <Flex flex="1" alignItems="center" justifyContent="center" bg="gray.50">
         <Flex direction="row" width="100%" maxWidth="800px" p={5} m={5} boxShadow="2xl" bg="white">
             <Box flex="1">
             <Link to="/auth/signin">
@@ -22,7 +23,8 @@ const SignUpPage = () => {
             </Box>
         </Flex>
         </Flex>
-    </>
+        <Contact />
+    </Box>
   )
 }
 

@@ -2,13 +2,15 @@ import { Box, Text, Heading, VStack, Image, Flex, ListIcon, UnorderedList, ListI
 import { CheckIcon } from '@chakra-ui/icons';
 import Header from "../../components/initial/Header";
 import Contact from "../../components/initial/Contact";
+import Plasticos from "../../assets/back.jpg";
+import City from "../../assets/city.jpg";
 
 export default function HomePage() {
     return (
         <Box>
             <Header />
             <Box width='100%' height='30vh' display='flex' justifyContent='center' alignItems='center' position='relative'>
-                <Image width='100%' height='100%' objectFit='cover' opacity={0.5} src="src\assets\back.jpg" alt="Plasticos" />
+                <Image width='100%' height='100%' objectFit='cover' opacity={0.5} src={Plasticos} alt="Plasticos" />
                 <VStack position='absolute' color='gray.700' spacing={4}>
                     <Heading as='h1' size='xl' mb={4}>
                         <Text>Nuestra meta es transformar Bogotá en una ciudad</Text>
@@ -50,7 +52,7 @@ export default function HomePage() {
                     </UnorderedList>
                 </Box>
                 <Box flex="1" mr="1" alignSelf="center" justifySelf="center">
-                    <Image src="src\assets\city.jpg" alt="Your Image" boxSize="500px" />
+                    <Image src={City} alt="Mundo" boxSize="500px" />
                 </Box>
             </Flex>
             <Contact />

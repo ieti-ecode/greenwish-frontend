@@ -1,16 +1,62 @@
-import React from 'react';
-import { Box, VStack, Text, Grid, GridItem, Input, IconButton } from '@chakra-ui/react';
-import { DeleteIcon } from '@chakra-ui/icons';
+import React from "react";
+import {
+  Box,
+  VStack,
+  Text,
+  Grid,
+  GridItem,
+  Input,
+  IconButton,
+  Button,
+} from "@chakra-ui/react";
+import { DeleteIcon } from "@chakra-ui/icons";
+import { request, getIdUser } from "../../api/AxiosHandler";
+import { useState, useEffect } from "react";
 
-const SelectedMaterials = ({ selectedMaterials, onQuantityChange, onRemove }) => {
-  const totalPoints = selectedMaterials.reduce((sum, material) => sum + material.kiloValue * material.quantity, 0);
-
+const SelectedMaterials = ({
+  selectedMaterials,
+  onQuantityChange,
+  onRemove,
+}) => {
+  const totalPoints = selectedMaterials.reduce(
+    (sum, material) => sum + material.kiloValue * material.quantity,
+    0
+  );
+  const [userPoints, setUserPoints] = useState();
+  useEffect(() => {
+    request("GET", `/users/${getIdUser()}`).then((response) => {
+      setUserPoints(response.data.points);
+    });
+  }, []);
+  function claimPoints() {
+    request("PUT", `/users/${getIdUser()}/points`, {
+      points: userPoints + totalPoints,
+    }).then(() => {
+      alert(`Haz conseguido: ${totalPoints} puntos`);
+    });
+  }
   return (
-    <Box p="4" bg="white" borderRadius="md" boxShadow="md" mb="4" width="100%" maxWidth="600px" mx="auto">
-      <Text fontSize="2xl" mb="4">Materiales Seleccionados</Text>
+    <Box
+      p="4"
+      bg="white"
+      borderRadius="md"
+      boxShadow="md"
+      mb="4"
+      width="100%"
+      maxWidth="600px"
+      mx="auto"
+    >
+      <Text fontSize="2xl" mb="4">
+        Materiales Seleccionados
+      </Text>
       <VStack spacing="4" align="stretch">
-        {selectedMaterials.map(material => (
-          <Grid key={material.id} templateColumns="2fr 1fr 1fr auto" gap={4} alignItems="center">
+        {selectedMaterials.map((material) => (
+          <Grid
+            key={material.id}
+            templateColumns="2fr 1fr 1fr auto"
+            gap={4}
+            alignItems="center"
+          >
             <GridItem>
               <Text>{material.name}</Text>
             </GridItem>
@@ -19,7 +65,9 @@ const SelectedMaterials = ({ selectedMaterials, onQuantityChange, onRemove }) =>
                 width="100%"
                 type="number"
                 value={material.quantity}
-                onChange={(e) => onQuantityChange(material.id, parseFloat(e.target.value))}
+                onChange={(e) =>
+                  onQuantityChange(material.id, parseFloat(e.target.value))
+                }
               />
             </GridItem>
             <GridItem>
@@ -35,7 +83,18 @@ const SelectedMaterials = ({ selectedMaterials, onQuantityChange, onRemove }) =>
           </Grid>
         ))}
       </VStack>
-      <Text fontSize="xl" fontWeight="bold" mt="4">Total Puntos: {totalPoints}</Text>
+      <Text fontSize="xl" fontWeight="bold" mt="4">
+        Total Puntos: {totalPoints}
+      </Text>
+      <Button
+        colorScheme="green"
+        mr={3}
+        onClick={() => {
+          claimPoints();
+        }}
+      >
+        Reciclar
+      </Button>
     </Box>
   );
 };

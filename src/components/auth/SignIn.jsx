@@ -23,7 +23,6 @@ const SignIn = () => {
         console.log(response.data);
         setIdUser(response.data.userId);
         request("GET", `/users/${response.data.userId}`).then((response) => {
-          console.log(response.data);
           let role = response.data.role;
           if (role === "Administrator") {
             window.location.href = "/welcome";

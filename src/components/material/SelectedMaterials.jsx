@@ -12,6 +12,7 @@ import {
 import { DeleteIcon } from "@chakra-ui/icons";
 import { request, getIdUser } from "../../api/AxiosHandler";
 import { useState, useEffect } from "react";
+import AlertMessage from "../AlertMessage";
 
 const SelectedMaterials = ({
   selectedMaterials,
@@ -23,6 +24,9 @@ const SelectedMaterials = ({
     0
   );
   const [userPoints, setUserPoints] = useState();
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+
   useEffect(() => {
     request("GET", `/users/${getIdUser()}`).then((response) => {
       setUserPoints(response.data.points);
@@ -32,7 +36,8 @@ const SelectedMaterials = ({
     request("PUT", `/users/${getIdUser()}/points`, {
       points: userPoints + totalPoints,
     }).then(() => {
-      alert(`Haz conseguido: ${totalPoints} puntos`);
+      setAlertMessage(`Haz conseguido: ${totalPoints} puntos`);
+      setAlertOpen(true);
     });
   }
   return (
@@ -95,6 +100,7 @@ const SelectedMaterials = ({
       >
         Reciclar
       </Button>
+      <AlertMessage isOpen={alertOpen} onClose={() => setAlertOpen(false)} title="¡Genial!" message={alertMessage} />
     </Box>
   );
 };

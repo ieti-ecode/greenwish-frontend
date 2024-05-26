@@ -13,10 +13,14 @@ import {
 import { request, getIdUser } from "../../api/AxiosHandler";
 import { useState, useEffect } from "react";
 import React from "react";
+import AlertMessage from "../AlertMessage";
 
 export const ClaimBenefitPopup = ({ title, description, points }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [userPoints, setUserPoints] = useState();
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+
   const formatNumberWithDots = (value) => {
     return Number(value).toLocaleString("es-ES");
   };
@@ -31,11 +35,13 @@ export const ClaimBenefitPopup = ({ title, description, points }) => {
       request("PUT", `/users/${getIdUser()}/points`, {
         points: userPoints - points,
       }).then(() => {
-        alert("Recompensa reclamada con éxito");
+        setAlertMessage("Felicitaciones! Ya puedes disfrutar de tu recompensa");
+        setAlertOpen(true);
         window.location.reload();
       });
     } else {
-      alert("No tienes puntos suficientes :c");
+      setAlertMessage("No tienes suficientes puntos para reclamar esta recompensa");
+      setAlertOpen(true);
     }
   }
 
@@ -82,6 +88,7 @@ export const ClaimBenefitPopup = ({ title, description, points }) => {
           </ModalFooter>
         </ModalContent>
       </Modal>
+      <AlertMessage isOpen={alertOpen} onClose={() => setAlertOpen(false)} title="Sobre tus puntos" message={alertMessage} />
     </>
   );
 };

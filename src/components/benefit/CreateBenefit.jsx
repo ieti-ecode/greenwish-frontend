@@ -9,7 +9,7 @@ import {
   CardFooter,
 } from "@chakra-ui/react";
 import { CreateBenefitPopup } from "./CreateBenefitPopup";
-
+import lapiz from "../../assets/lapiz_nuevoElemento.jpg"
 export const CreateBenefit = () => {
 
   return (
@@ -25,7 +25,8 @@ export const CreateBenefit = () => {
       <Image
         objectFit="cover"
         maxW={{ base: "100%", sm: "180px" }}
-        src={"src/assets/lapiz_nuevoElemento.jpg"}
+        alt="lapiz"
+        src={lapiz}
       />
       <CardBody>
         <CreateBenefitPopup/>

@@ -2,7 +2,7 @@ import { Box, Card, CardBody, CardHeader, Center, Heading, Image, SimpleGrid, Te
 import { ServiceList } from '../../components/initial/ServiceList';
 import Header from '../../components/initial/Header';
 import Contact from '../../components/initial/Contact';
-
+import service from '../../assets/service.jpg';
 export default function ServicePage() {
 
     const serviceListCompany = [
@@ -42,7 +42,7 @@ export default function ServicePage() {
         <Box>
             <Header />
             <Box width='100%' mb="10" height='30vh' display='flex' justifyContent='center' alignItems='center' position='relative'>
-                <Image width='100%' height='100%' objectFit='cover' opacity={0.6} src="src\assets\service.jpg" alt="Plasticos" />
+                <Image width='100%' height='100%' objectFit='cover' opacity={0.6} src={service} alt="Plasticos" />
                 <VStack position='absolute' color='gray.700' spacing={4}>
                     <Heading as='h1' size='xl' mb={4}>¡Juntos podemos construir un futuro más sostenible!</Heading>
                 </VStack>

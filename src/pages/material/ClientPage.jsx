@@ -39,7 +39,7 @@ const ClientPage = () => {
   };
 
   return (
-    <Flex direction="column" align="center">
+    <Flex direction="column" align="center" width="100vw" height="100vh">
       <Header />
       <Text fontSize="3xl" fontWeight="bold" mb="4">Materiales Disponibles</Text>
       <SelectedMaterials

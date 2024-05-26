@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Heading, Text, Center } from "@chakra-ui/react";
 import { GridCards } from "../../components/benefit/GridCards";
 import { request, getIdUser } from "../../api/AxiosHandler";
 import { useState, useEffect } from "react";
@@ -22,7 +22,7 @@ export default function BenefitsUser() {
       });
   }, []);
   return (
-    <Box m={3}>
+    <Box m={3} width="100vw" height="100vh">
       <Header />
       <Heading
         as="h2"
@@ -36,8 +36,10 @@ export default function BenefitsUser() {
       >
         Elige tu recompensa
       </Heading>
-      <Text fontSize="2xl" fontWeight="bold" mb={5}>Tus puntos actuales son: {userPoints}</Text>
-      <GridCards list={list} />
+      <Center>
+        <Text fontSize="2xl" fontWeight="bold" mb={5}>Tus puntos actuales son: {userPoints}</Text>
+        <GridCards list={list} />
+      </Center>
     </Box>
   );
 }

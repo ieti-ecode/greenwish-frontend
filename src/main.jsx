@@ -18,6 +18,7 @@ const AlliedPage = React.lazy(() => import("./pages/initial/AlliedPage.jsx"));
 const SignUpPage = React.lazy(() => import("./pages/initial/SignUpPage.jsx"));
 const SignInPage = React.lazy(() => import("./pages/initial/SignInPage.jsx"));
 const CompanyPage = React.lazy(() => import("./pages/company/CompaniesPage.jsx"));
+const CompanyClientPage = React.lazy(() => import("./pages/company/CompanyClientPage.jsx"));
 const WelcomePage = React.lazy(() => import("./pages/welcome/WelcomePage"));
 const WelcomeClientPage = React.lazy(() => import("./pages/welcome/WelcomeClientPage"));
 const WelcomeCompanyPage = React.lazy(() => import("./pages/welcome/WelcomeCompanyPage"));
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
   {
     path: "/company",
     element: <Suspense fallback={<div>Cargando...</div>}><CompanyPage /></Suspense>,
+  },
+  {
+    path: "/companyClient",
+    element: <Suspense fallback={<div>Cargando...</div>}><CompanyClientPage /></Suspense>,
   },
   {
     path: "/materialClient",

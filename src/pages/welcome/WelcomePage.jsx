@@ -4,7 +4,7 @@ import Contact from "../../components/initial/Contact";
 
 export default function WelcomePage() {
     return (
-        <Box>
+        <Box width="100vw" height="100vh">
             <Header />
             <Box width='100%' height='30vh' display='flex' justifyContent='center' alignItems='center' position='relative'>
                 <Image width='100%' height='100%' objectFit='cover' opacity={0.5} src="src\assets\back.jpg" alt="Plasticos" />
@@ -19,13 +19,12 @@ export default function WelcomePage() {
                 <Box flex="1" ml="10%" mr="100">
                     <Heading as="h2" size="xl" mb="8" fontSize="5xl" ml="2" bgGradient="linear(to-l, green.300, green.500)" bgClip="text">Bienvenidos a GreenWish!</Heading>
                     <Heading as="h2" size="xl" mb="8" fontSize="xl" ml="2" bgGradient="linear(to-l, green.300, green.500)" bgClip="text">¿Estás listo para convertirte en un héroe del reciclaje?</Heading>
-                    
+
                 </Box>
                 <Box flex="1" mr="1" alignSelf="center" justifySelf="center">
                     <Image src="src\assets\city.jpg" alt="Your Image" boxSize="500px" />
                 </Box>
             </Flex>
-            <Contact />
         </Box>
     )
 }

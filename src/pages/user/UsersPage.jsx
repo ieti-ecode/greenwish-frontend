@@ -7,7 +7,7 @@ const UsersPage = () => {
   const { users, loading, error, deleteUser, setSearchQuery } = useUsers();
 
   return (
-    <Box p={5}>
+    <Box p={5} width="100vw" height="100vh">
         <HeaderWelcome />
         <Input 
             placeholder="Buscar por nombre" 

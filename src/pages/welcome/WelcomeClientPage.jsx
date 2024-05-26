@@ -4,7 +4,7 @@ import Contact from "../../components/initial/Contact";
 
 export default function WelcomePage() {
     return (
-        <Box>
+        <Box width="100vw" height="100vh">
             <Header />
             <Box width='100%' height='30vh' display='flex' justifyContent='center' alignItems='center' position='relative'>
                 <Image width='100%' height='100%' objectFit='cover' opacity={0.5} src="src\assets\back.jpg" alt="Plasticos" />
@@ -25,7 +25,6 @@ export default function WelcomePage() {
                     <Image src="src\assets\city.jpg" alt="Your Image" boxSize="500px" />
                 </Box>
             </Flex>
-            <Contact />
         </Box>
     )
 }

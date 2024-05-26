@@ -18,7 +18,7 @@ export default function BenefitsUser() {
   }, []);
 
   return (
-    <Box m={3}>
+    <Box m={3} width="100vw" height="100vh">
       <Header />
       <Heading
         as="h2"

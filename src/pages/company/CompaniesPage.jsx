@@ -1,7 +1,6 @@
 import { CompanyForm } from "../../components/company/CompanyForm";
 import CompaniesList from "../../components/initial/CompaniesList";
 import { useDisclosure } from '@chakra-ui/hooks'
-import MenuAppp from "../../components/MenuApp";
 import { Button, Heading, Box, Modal, ModalBody, Text, ModalContent, ModalCloseButton, ModalOverlay, ModalHeader, ModalFooter } from '@chakra-ui/react';
 import Header from "../../components/welcome/HeaderWelcome";
 

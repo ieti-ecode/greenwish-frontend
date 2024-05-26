@@ -24,13 +24,13 @@ export const Menu = () => {
                     </Link>
                 </ListItem>
                 <ListItem>
-                    <Link to="/material" style={{ display: 'flex', alignItems: 'center' }}>
+                    <Link to="/materialClient" style={{ display: 'flex', alignItems: 'center' }}>
                         <Icon as={FaBox} boxSize={5} mr="2" color='green.500' />
                         <Text bgGradient="linear(to-l, green.300, green.500)" bgClip="text" fontWeight="bold" fontSize='xl'>Materiales</Text>
                     </Link>
                 </ListItem>
                 <ListItem>
-                    <Link to="/company" style={{ display: 'flex', alignItems: 'center' }}>
+                    <Link to="/companyClient" style={{ display: 'flex', alignItems: 'center' }}>
                         <Icon as={FaBuilding} boxSize={5} mr="2" color='green.500' />
                         <Text bgGradient="linear(to-l, green.300, green.500)" bgClip="text" fontWeight="bold" fontSize='xl'>Empresas</Text>
                     </Link>

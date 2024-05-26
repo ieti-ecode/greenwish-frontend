@@ -69,7 +69,7 @@ const AdminPage = () => {
   };
 
   return (
-    <Flex direction="column" align="center">
+    <Flex direction="column" align="center" width="100vw" height="100vh">
       <Header />
       <Text fontSize="3xl" fontWeight="bold" mb="4">Administración de Materiales</Text>
       <Box p="4" bg="white" borderRadius="md" boxShadow="md" mb="4" width="90%" maxWidth="500px">

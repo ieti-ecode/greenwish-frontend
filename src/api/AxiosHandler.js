@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:8080/api/v1";
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
 export const getAuthToken = () => window.localStorage.getItem("token");
 export const getIdUser = () => window.localStorage.getItem("id");

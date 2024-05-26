@@ -2,6 +2,7 @@ import { Box, Heading } from "@chakra-ui/react";
 import { GridCardsAdmin } from "../../components/benefit/GridCardsAdmin";
 import { useState, useEffect } from "react";
 import { request } from "../../api/AxiosHandler";
+import  Header from "../../components/welcome/HeaderWelcome";
 
 export default function BenefitsUser() {
 
@@ -17,7 +18,8 @@ export default function BenefitsUser() {
   }, []);
 
   return (
-    <Box m={3}>
+    <Box m={3} width="100vw" height="100vh">
+      <Header />
       <Heading
         as="h2"
         size="xl"

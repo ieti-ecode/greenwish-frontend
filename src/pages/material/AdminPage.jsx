@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Box, VStack, Input, Button, Text, Flex } from '@chakra-ui/react';
-import MaterialCard from '../components/MaterialCard';
-import { getMaterials, createMaterial, updateMaterial, updateImageMaterial, deleteMaterial, getMaterial } from "../api/AxiosHandler";
-
+import MaterialCard from '../../components/material/MaterialCard';
+import { getMaterials, createMaterial, updateMaterial, updateImageMaterial, deleteMaterial, getMaterial } from "../../api/AxiosHandler";
+import  Header from "../../components/welcome/HeaderWelcome";
 const AdminPage = () => {
   const [materials, setMaterials] = useState([]);
   const [form, setForm] = useState({ name: '', description: '', kiloValue: '', image: '' });
@@ -69,7 +69,8 @@ const AdminPage = () => {
   };
 
   return (
-    <Flex direction="column" align="center">
+    <Flex direction="column" align="center" width="100vw" height="100vh">
+      <Header />
       <Text fontSize="3xl" fontWeight="bold" mb="4">Administración de Materiales</Text>
       <Box p="4" bg="white" borderRadius="md" boxShadow="md" mb="4" width="90%" maxWidth="500px">
         <Text fontSize="2xl" mb="4">{editingMaterial ? 'Editar Material' : 'Agregar Material'}</Text>

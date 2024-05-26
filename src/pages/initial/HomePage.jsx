@@ -35,14 +35,6 @@ export default function HomePage() {
                             <Flex align="center" mb="3">
                                 <ListIcon as={CheckIcon} boxSize="5" color="green.500" />
                                 <Text fontSize="xl" textAlign="justify">
-                                    Separa tu plástico: Recolecta botellas, envases y otros objetos de plástico que ya no uses.
-                                </Text>
-                            </Flex>
-                        </ListItem>
-                        <ListItem>
-                            <Flex align="center" mb="3">
-                                <ListIcon as={CheckIcon} boxSize="5" color="green.500" />
-                                <Text fontSize="xl" textAlign="justify">
                                     Gana puntos: Recibirás puntos por cada kilo de plástico que recicles.
                                 </Text>
                             </Flex>

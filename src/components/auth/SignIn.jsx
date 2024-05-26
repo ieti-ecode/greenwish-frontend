@@ -11,6 +11,7 @@ const SignIn = () => {
     formState: { errors, isSubmitting },
     getValues,
   } = useForm({ mode: "onChange" });
+  
 
   function onSubmit(values) {
     request("POST", "/auth/signin", {
@@ -19,7 +20,19 @@ const SignIn = () => {
     })
       .then((response) => {
         setAuthToken(response.data.token);
+        console.log(response.data);
         setIdUser(response.data.userId);
+        request("GET", `/users/${response.data.userId}`).then((response) => {
+          console.log(response.data);
+          let role = response.data.role;
+          if (role === "Administrator") {
+            window.location.href = "/welcome";
+          } else if (role === "Customer") {
+            window.location.href = "/welcomeClient";
+          } else if (role === "Company") {
+            window.location.href = "/welcomeCompany";
+          }
+        })
       })
       .catch((error) => {
         console.log(error);

@@ -4,9 +4,12 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import './index.css';
 const HomePage = React.lazy(() => import("./pages/initial/HomePage"));
-const CompanyList = lazy(() => import("./components/company/CompanyList"));
-const MaterialList = lazy(() => import("./components/material/MaterialList"));
-const UserInformation = lazy(() => import("./components/user/UserInformation"));
+const MaterialClientPage = lazy(() => import("./pages/material/ClientPage"));
+const MaterialAdmin = lazy(() => import("./pages/material/AdminPage"));
+const UserProfilePage = lazy(() => import("./pages/user/UserProfilePage"));
+const UserProfileAdminPage = lazy(() => import("./pages/user/UserProfileAdminPage"));
+const UserProfileCompanyPage = lazy(() => import("./pages/user/UserProfileCompanyPage"));
+const UsersPage = React.lazy(() => import("./pages/user/UsersPage"));
 const ServicePage = React.lazy(() => import("./pages/initial/ServicePage"));
 const BenefitUser = lazy(() => import("./pages/benefit/BenefitUser.jsx"));
 const BenefitAdmin = lazy(() => import("./pages/benefit/BenefitAdmin.jsx"));
@@ -14,10 +17,11 @@ const Errorpage = React.lazy(() => import("./pages/ErrorPage"));
 const AlliedPage = React.lazy(() => import("./pages/initial/AlliedPage.jsx"));
 const SignUpPage = React.lazy(() => import("./pages/initial/SignUpPage.jsx"));
 const SignInPage = React.lazy(() => import("./pages/initial/SignInPage.jsx"));
-const ClientPage = React.lazy(() => import("./pages/ClientPage"));
-const AdminPage = React.lazy(() => import("./pages/AdminPage"));
-const CompanyPage = React.lazy(() => import("./pages/CompaniesPage"));
-const App = React.lazy(() => import("./App"));
+const CompanyPage = React.lazy(() => import("./pages/company/CompaniesPage.jsx"));
+const CompanyClientPage = React.lazy(() => import("./pages/company/CompanyClientPage.jsx"));
+const WelcomePage = React.lazy(() => import("./pages/welcome/WelcomePage"));
+const WelcomeClientPage = React.lazy(() => import("./pages/welcome/WelcomeClientPage"));
+const WelcomeCompanyPage = React.lazy(() => import("./pages/welcome/WelcomeCompanyPage"));
 
 const router = createBrowserRouter([
   {
@@ -42,8 +46,16 @@ const router = createBrowserRouter([
     element: <Suspense fallback={<div>Cargando...</div>}><ServicePage /></Suspense>,
   },
   {
-    path: "/app",
-    element: <Suspense fallback={<div>Cargando...</div>}><App /></Suspense>,
+    path: "/welcomeClient",
+    element: <Suspense fallback={<div>Cargando...</div>}><WelcomeClientPage /></Suspense>,
+  },
+  {
+    path: "/welcomeCompany",
+    element: <Suspense fallback={<div>Cargando...</div>}><WelcomeCompanyPage /></Suspense>,
+  },
+  {
+    path: "/welcome",
+    element: <Suspense fallback={<div>Cargando...</div>}><WelcomePage /></Suspense>,
   },
   {
     path: "/benefit",
@@ -58,21 +70,33 @@ const router = createBrowserRouter([
     element: <Suspense fallback={<div>Cargando...</div>}><CompanyPage /></Suspense>,
   },
   {
+    path: "/companyClient",
+    element: <Suspense fallback={<div>Cargando...</div>}><CompanyClientPage /></Suspense>,
+  },
+  {
+    path: "/materialClient",
+    element: <Suspense fallback={<div>Cargando...</div>}><MaterialClientPage /></Suspense>,
+  },
+  {
     path: "/material",
-    element: <Suspense fallback={<div>Cargando...</div>}><MaterialList /></Suspense>,
+    element: <Suspense fallback={<div>Cargando...</div>}><MaterialAdmin /></Suspense>,
+  },
+  {
+    path: "/userAdmin",
+    element: <Suspense fallback={<div>Cargando...</div>}><UserProfileAdminPage /></Suspense>,
+  },
+  {
+    path: "/userCompany",
+    element: <Suspense fallback={<div>Cargando...</div>}><UserProfileCompanyPage /></Suspense>,
   },
   {
     path: "/user",
-    element: <Suspense fallback={<div>Cargando...</div>}><UserInformation /></Suspense>,
+    element: <Suspense fallback={<div>Cargando...</div>}><UserProfilePage /></Suspense>,
   },
   {
-    path: "/client",
-    element: <Suspense fallback={<div>Cargando...</div>}><ClientPage /></Suspense>,
+    path: "/allUsers",
+    element: <Suspense fallback={<div>Cargando...</div>}><UsersPage /></Suspense>,
   },
-  {
-    path: "/admin",
-    element: <Suspense fallback={<div>Cargando...</div>}><AdminPage /></Suspense>,
-  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

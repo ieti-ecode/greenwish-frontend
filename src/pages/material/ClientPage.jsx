@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Box, VStack, Text, Flex } from '@chakra-ui/react';
-import MaterialCard from '../components/MaterialCard';
-import SelectedMaterials from '../components/SelectedMaterials';
-import { getMaterials } from "../api/AxiosHandler";
+import { Text, Flex } from '@chakra-ui/react';
+import MaterialCard from '../../components/material/MaterialCard';
+import SelectedMaterials from '../../components/material/SelectedMaterials';
+import { getMaterials } from "../../api/AxiosHandler";
+import  Header from "../../components/welcome/HeaderWelcomeClient";
 
 const ClientPage = () => {
   const [materials, setMaterials] = useState([]);
@@ -38,7 +39,8 @@ const ClientPage = () => {
   };
 
   return (
-    <Flex direction="column" align="center">
+    <Flex direction="column" align="center" width="100vw" height="100vh">
+      <Header />
       <Text fontSize="3xl" fontWeight="bold" mb="4">Materiales Disponibles</Text>
       <SelectedMaterials
         selectedMaterials={selectedMaterials}

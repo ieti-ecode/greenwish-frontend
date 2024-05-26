@@ -23,7 +23,6 @@ const SignIn = () => {
         console.log(response.data);
         setIdUser(response.data.userId);
         request("GET", `/users/${response.data.userId}`).then((response) => {
-          console.log(response.data);
           let role = response.data.role;
           if (role === "Administrator") {
             window.location.href = "/welcome";
@@ -47,10 +46,10 @@ const SignIn = () => {
         type="email"
         placeholder="Tu correo electrónico"
         validation={{
-          required: "This is required",
+          required: "Campo obligatorio",
           pattern: {
             value: /\S+@\S+\.\S+/,
-            message: "Entered value does not match email format",
+            message: "No es un correo válido",
           },
         }}
         register={register}
@@ -64,7 +63,7 @@ const SignIn = () => {
         type="password"
         placeholder="Tu contraseña"
         validation={{
-          required: "This is required",
+          required: "Campo obligatorio",
           minLength: { value: 4, message: "Minimum length should be 4" },
         }}
         register={register}

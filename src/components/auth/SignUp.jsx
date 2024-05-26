@@ -1,8 +1,9 @@
-import { Button, Flex, Icon, Box, Image, Switch, FormControl, FormLabel } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Button, Switch, FormControl, FormLabel } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import FormField from "./FormField";
 import { request } from "../../api/AxiosHandler";
+import AlertMessage from "../AlertMessage";
+import { useState } from "react";
 
 const SignUp = () => {
   const {
@@ -12,6 +13,9 @@ const SignUp = () => {
     getValues,
   } = useForm({ mode: "onChange" });
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+
   function onSubmit(values) {
     request("POST", "/users", {
       name: values.name,
@@ -20,16 +24,19 @@ const SignUp = () => {
       isCompany: values.isCompany,
     })
       .then((response) => {
-        alert("User created successfully");
+        setIsOpen(true);
+        setAlertMessage("Usuario creado exitosamente");
         console.log(response.data);
       })
       .catch((error) => {
+        setIsOpen(true);
+        setAlertMessage("Error al crear el usuario");
         console.log(error);
       });
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <><form onSubmit={handleSubmit(onSubmit)}>
       <FormField
         id="name"
         label="Nombre"
@@ -41,8 +48,7 @@ const SignUp = () => {
         }}
         register={register}
         getValues={getValues}
-        errors={errors}
-      />
+        errors={errors} />
       <FormField
         id="email"
         label="Correo Electrónico"
@@ -57,8 +63,7 @@ const SignUp = () => {
         }}
         register={register}
         getValues={getValues}
-        errors={errors}
-      />
+        errors={errors} />
       <FormField
         id="password"
         label="Contraseña"
@@ -70,8 +75,7 @@ const SignUp = () => {
         }}
         register={register}
         getValues={getValues}
-        errors={errors}
-      />
+        errors={errors} />
       <FormField
         id="cpassword"
         label="Confirmar Contraseña"
@@ -80,25 +84,23 @@ const SignUp = () => {
         validation={{
           required: "El campo es obligatorio",
           minLength: { value: 4, message: "La longitud mínima debe ser 4" },
-          validate: (value) =>
-            value === getValues("password") || "Las contraseñas no coinciden",
+          validate: (value) => value === getValues("password") || "Las contraseñas no coinciden",
         }}
         register={register}
         getValues={getValues}
-        errors={errors}
-      />
+        errors={errors} />
 
       <FormControl display='flex' alignItems='center'>
         <FormLabel htmlFor='email-alerts' mb='0'>
           ¿Eres una empresa de reciclaje?
         </FormLabel>
-        <Switch id='email-alerts' {...register("isCompany")}/>
+        <Switch id='email-alerts' {...register("isCompany")} />
       </FormControl>
 
       <Button mt={4} colorScheme="teal" isLoading={isSubmitting} type="submit">
         Registrarse
       </Button>
-    </form>
+    </form><AlertMessage isOpen={isOpen} onClose={() => setIsOpen(false)} title="Registro" message={alertMessage} /></>
   );
 };
 

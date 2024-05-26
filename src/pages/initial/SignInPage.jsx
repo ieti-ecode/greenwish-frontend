@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import SignIn from '../../components/auth/SignIn'
 import Contact from '../../components/initial/Contact'
 import Header from '../../components/initial/Header'
-
+import Logo from '../../assets/logo.jpg'
 
 const SignInPage = () => {
   return (
@@ -17,7 +17,7 @@ const SignInPage = () => {
             <Link to="/">
               <Icon as={ArrowBackIcon} w={8} h={8} color='green.500' />
             </Link>
-            <Image src="/src/assets/logo.jpg" alt="Your alt text" />
+            <Image src={Logo} alt="Your alt text" />
           </Box>
           <Box flex="1" display="flex" flexDirection="column" alignItems="center" width="100%" justifyContent="center" >
             <SignIn />
